@@ -7,17 +7,12 @@ var express = require('express'),
       controller: new Leap.Controller()
     })
 
-var leftLifx = require('./lib/lifx').createLifx({
+var lifx = require('./lib/lifx').createLifx({
   minLights: 1,
-  defaultLabel: 'Left'
+  defaultLabel: 'Lamp'
 })
 
-var rightLifx = require('./lib/lifx').createLifx({
-  minLights: 1,
-  defaultLabel: 'Right'
-})
-
-var lifxs = [leftLifx, rightLifx]
+var lifxs = [lifx]
 
 app.use(express.static(__dirname + '/static'));
 app.set('port', process.env.PORT || '8888')
@@ -41,8 +36,7 @@ server.listen(app.settings.port, function(){
   console.log('App server listening at http://localhost:'+app.settings.port)
 })
 
-leftLifx.start()
-rightLifx.start()
+lifx.start()
 leapLifx.start()
 
 
